@@ -1,4 +1,4 @@
-package graphANDdijkstra;
+package undirectedGraphANDdijkstra;
 
 
 //import java.util.NoSuchElementException;

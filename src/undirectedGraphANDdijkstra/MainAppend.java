@@ -1,5 +1,5 @@
 
-package graphANDdijkstra;
+package undirectedGraphANDdijkstra;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,16 +23,15 @@ import java.io.IOException;
  * *<a href="http://www.facebook.com/vagnermachado84"> Do you like this code? Let me know! </a>
  *</pre>
  */
-public class MainWrite
+public class MainAppend
 {
-
 	/**
 	 * main - runs the program
 	 * @param args - an array of strings as arguments
 	 */
 	public static void main(String[] args) 
 	{
-		if(args.length != 2) ///
+		if(args.length != 2)
 		{
 			System.out.println("*****************************************************************"
 					+ "To run the program to find the longest of shortest paths\n"
@@ -46,46 +45,31 @@ public class MainWrite
 					+ "*****************************************************************\n\n");
 			return;
 		}
-		
-		FileWriter f = null;
-
-		//instantiate file writer
-		try ///
-		{
-			f = new FileWriter(new File(args[1]));
-		} catch (IOException e) 
-		{
-			System.out.println("\nError instantiating File to write results.\n");
-			e.printStackTrace();
-		}
-
+	
 		//build a graph and  instantiate Dijkstra
 		WeightedUndirectedGraph G = new WeightedUndirectedGraph(new File(args[0]));
 		DijkstraPath d = new DijkstraPath(G);
 
+		StringBuilder sb = new StringBuilder();
 		//finds the longest shortest path
 		for(int i = 0; i < G.V(); i++)
 		{
 			//append to file instead of concatenate to string
-			try 
-			{
-				f.append(i + ": " + d.findFar(i) + "\n");
-			} catch (IOException e) 
-			{
-				System.out.println("\n ***Error appending to File with results ***\n");	
-				e.printStackTrace();
-			}
+			
+				sb.append(i + ": " + d.findFar(i) + "\n");
 		}
-
-		//close file
+		
+		//write and close file
 		try 
 		{
+			FileWriter f = new FileWriter(new File (args[1]));
+			f.append(sb.toString());
 			f.close();
 		} catch (IOException e)
 		{
-			System.out.println("\n ***Error closing File with results ***\n");
+			System.out.println("\n ***Error writing to File with results ***\n");
 			e.printStackTrace();
-		}  
+		}
 	}
-
+	
 }

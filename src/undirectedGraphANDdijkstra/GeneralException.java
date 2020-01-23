@@ -1,4 +1,4 @@
-package graphANDdijkstra;
+package undirectedGraphANDdijkstra;
 
 @SuppressWarnings("serial")
 /**<pre>
